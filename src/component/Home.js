@@ -35,7 +35,7 @@ function Home(props) {
           <div className="home_body_view_left">
             <iframe
               src={embedUrl1}
-              title="W3Schools Free Online Web Tutorials"
+              title="W3Schools Free Online Web Tutorial1s"
             ></iframe>
           </div>
           <div className="home_body_view_left">

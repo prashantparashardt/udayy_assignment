@@ -1,0 +1,69 @@
+var banner = document.getElementById('banner');
+var legal = document.getElementById('roll-cta');
+var replay = document.getElementById('replay');
+
+var tl = new TimelineMax({repeat:0, repeatDelay:2.5});
+
+
+window.onload = function() {   
+    
+  tl.set(banner, {visibility: "visible"})
+
+	/*frame one*/	
+	.add("frame1")
+	.from(".bg", 0, {alpha:1, ease: Power2.easeInOut})
+	.from(".dell-logo, .vendor-logo, .title1-1, .title1-2, .title1-3, .vendor-copy", .5, {alpha:0, ease: Power2.easeInOut})
+	.to(".title1-1, .title1-2, .title1-3, .vendor-logo, .vendor-copy, .dell-logo", .5, {alpha:0, ease: Power3.easeInOut}, "frame1+=2.5")
+
+	/*frame two*/
+	.add("frame2","frame1+=3")
+	.from(".product1", .5, {alpha:0, x:-160, ease: Power3.easeInOut}, "frame2")
+	.from(".title2", .5, {alpha:0, x:160, ease: Power3.easeInOut}, "frame2")
+	.to(".product1, .title2", 0.5, {alpha:0, ease: Power3.easeInOut}, "frame2+=2.5")
+
+	/*frame three*/
+	.add("frame3","frame2+=3")
+	.from(".product2", .5, {alpha:0, y:-250, ease: Power3.easeInOut}, "frame3")
+	.from(".title3", .5, {alpha:0, ease: Power3.easeInOut}, "frame3+=.3")
+	.to(".product2, .title3", 0.5, {alpha:0, ease: Power3.easeInOut}, "frame3+=2.5")
+
+	/*frame four*/
+	.add("frame4","frame3+=3")
+	.from(".product3", .5, {alpha:0, y:600, ease: Power3.easeInOut}, "frame4")
+	.from(".title4", .5, {alpha:0, ease: Power3.easeInOut}, "frame4")
+	.to(".title4", 0.5, {alpha:0, ease: Power3.easeInOut}, "frame4+=2.3")
+	.to(".product3", 0.5, {scale:0.50, x:14, y:-54, ease: Power3.easeInOut}, "frame4+=2.5")
+
+	// /*frame five*/
+	.add("frame5","frame4+=3")
+	.from(".title5, .price-mainbox, .cta, .dc", 0.5, {alpha:0, ease: Power3.easeInOut},"frame5")
+	.to(".vendor-logo, .vendor-copy, .dell-logo", 0.5, {alpha:1, ease: Power3.easeInOut},"frame5")
+
+	 /*Legal*/
+	.from("#roll-cta", .5, {alpha:0, x:-300, ease:Power4.easeout}, "frame6")
+	.from("#rolltext", .5, {alpha:0, ease:Power4.easeout}, "frame6")
+	.from("#legal-text", .5, {alpha:0, ease:Power4.easeout}, "frame6")
+  	.to(".replay", .3, {autoAlpha:1, visibility: "visible", display:'block', ease: Sine.easeOut}, "frame6")
+    
+    legal.addEventListener("mouseover",legalHover);
+      function legalHover(){
+      tl.pause();
+      TweenMax.to("#legal", .5, {top:0, ease:Power1.easeOut})  
+    }
+    
+    legal.addEventListener("mouseout",legalOut);
+      function legalOut(){
+      tl.play();
+      TweenMax.to("#legal", .5, {top:-1000, ease:Power1.easeIn})
+    }
+
+    //----- Reply ------
+      replay.addEventListener("click", function(){
+          tl.restart();
+      });
+    
+    // tl.seek("loop")
+
+    var currentDuration = tl.duration();
+    console.log(currentDuration);   
+};
